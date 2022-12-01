@@ -1,0 +1,34 @@
+.menuNav {
+  color: white;
+}
+
+.navbarItems a {
+  text-decoration: none;
+  color: white;
+}
+
+.navbarItems li {
+  margin: 10px;
+}
+
+.navbarItems li:last-child {
+  margin-top: 30px;
+}
+
+.navbarItems li .active {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.friendTitle {
+  margin-top: 100px;
+  font-size: 2em;
+  font-weight: 300;
+}
+
+.friendsList {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-row-gap: 24px;
+}

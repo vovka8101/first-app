@@ -1,0 +1,26 @@
+.userItem a {
+  text-decoration: none;
+  color: black;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #b1d5dd;;
+}
+
+.userItem a:hover {
+  background-color: #51b1c6;
+  border-radius: 10px;
+}
+
+.userItem .userImg img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.userItem .active {
+  font-size: 1.3em;
+  background-color: #51b1c6;
+  border-radius: 10px;
+}

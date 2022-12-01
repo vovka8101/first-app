@@ -1,0 +1,14 @@
+.postsContent {
+  margin-top: 40px;
+}
+
+.postsContent h2 {
+  font-size: 2em;
+  font-weight: normal;
+  margin-top: 20px;
+}
+
+.postsContent .posts {
+  display: flex;
+  flex-direction: column-reverse;
+}

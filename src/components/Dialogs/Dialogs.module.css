@@ -1,0 +1,42 @@
+.content h2 {
+  font-size: 2em;
+  font-style: italic;
+  color: #002d26;
+  margin-bottom: 15px;
+}
+
+.dialogs {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-column-gap: 15px;
+}
+
+.users {
+  text-align: center;
+  background-color: skyblue;
+  border-radius: 10px;
+  max-height: 425px;
+  overflow: auto;
+}
+
+.messages {
+  background-color: darkslategray;
+  color: floralwhite;
+  border-radius: 20px;
+  font-size: 1.2em;
+  max-height: 425px;
+  overflow: auto;
+}
+
+.messageItem {
+  padding: 15px;
+}
+
+.inputArea {
+  grid-column: 2 / 3;
+  padding: 10px 30px;
+}
+
+.inputArea textarea {
+  border: none;
+}
