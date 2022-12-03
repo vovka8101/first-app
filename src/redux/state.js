@@ -42,7 +42,7 @@ const store = {
       ]
     }
   },
-  _renderComponentsTree: undefined,
+  _renderComponentsTree() {},
   _generateId(arr) {
     return arr[arr.length - 1].id + 1;
   },
@@ -80,16 +80,21 @@ const store = {
   dispatch(action) {
     if (action.type === UPDATE_POST_TEXT) {
       this._state.profile.changeTextareaMsg = action.text;
-    } else if (action.type === ADD_POST) {
+      this._renderComponentsTree(this._state);
+    }
+    else if (action.type === ADD_POST) {
       let msg = this._state.profile.changeTextareaMsg;
       const newId = this._generateId(this._state.profile.posts);
       const newPost = {id: newId, message: msg, likesCount: 0, imgSrc: 'https://picsum.photos/id/299/200/200'};
       this._state.profile.posts.push(newPost);
       this._state.profile.changeTextareaMsg = '';
       this._renderComponentsTree(this._state);
-    } else if (action.type === UPDATE_MESSAGE_TEXT) {
+    }
+    else if (action.type === UPDATE_MESSAGE_TEXT) {
       this._state.dialogs.messages.currentTypedText = action.text;
-    } else if (action.type === ADD_MESSAGE) {
+      this._renderComponentsTree(this._state);
+    }
+    else if (action.type === ADD_MESSAGE) {
       let msg = this._state.dialogs.messages.currentTypedText;
       const newId = this._generateId(this._state.profile.posts);
       const newMessage = {id: newId, message: msg};
