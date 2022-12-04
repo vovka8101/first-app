@@ -5,7 +5,7 @@ const generateId = (arr) => {
   return arr[arr.length - 1].id + 1;
 }
 
-const renderDialogs = (state, action) => {
+const dialogsReducer = (state, action) => {
   if (action.type === UPDATE_MESSAGE_TEXT) {
     state.currentTypedText = action.text;
   }
@@ -26,4 +26,4 @@ export const updateMessageTextActionCreator = (msg) => {
   return {type: UPDATE_MESSAGE_TEXT, text: msg};
 }
 
-export default renderDialogs;
+export default dialogsReducer;

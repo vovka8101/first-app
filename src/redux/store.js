@@ -1,5 +1,5 @@
-import renderDialogs from "./renderDialogs";
-import renderProfile from "./renderProfile";
+import renderDialogs from "./dialogsReducer";
+import renderProfile from "./profileReducer";
 
 const store = {
   // private data

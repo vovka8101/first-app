@@ -5,7 +5,7 @@ const generateId = (arr) => {
   return arr[arr.length - 1].id + 1;
 }
 
-const renderProfile = (state, action) => {
+const profileReducer = (state, action) => {
   if (action.type === UPDATE_POST_TEXT) {
     state.changeTextareaMsg = action.text;
   }
@@ -26,4 +26,4 @@ export const updatePostTextActionCreator = (text) => {
 }
 
 
-export default renderProfile;
+export default profileReducer;
