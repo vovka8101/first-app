@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
+import renderDialogs from "./renderDialogs";
+import renderProfile from "./renderProfile";
 
 const store = {
   // private data
@@ -43,9 +41,6 @@ const store = {
     }
   },
   _renderComponentsTree() {},
-  _generateId(arr) {
-    return arr[arr.length - 1].id + 1;
-  },
   // public methods
   getState() {
     return this._state;
@@ -78,47 +73,12 @@ const store = {
   },
 
   dispatch(action) {
-    if (action.type === UPDATE_POST_TEXT) {
-      this._state.profile.changeTextareaMsg = action.text;
-      this._renderComponentsTree(this._state);
-    }
-    else if (action.type === ADD_POST) {
-      let msg = this._state.profile.changeTextareaMsg;
-      const newId = this._generateId(this._state.profile.posts);
-      const newPost = {id: newId, message: msg, likesCount: 0, imgSrc: 'https://picsum.photos/id/299/200/200'};
-      this._state.profile.posts.push(newPost);
-      this._state.profile.changeTextareaMsg = '';
-      this._renderComponentsTree(this._state);
-    }
-    else if (action.type === UPDATE_MESSAGE_TEXT) {
-      this._state.dialogs.messages.currentTypedText = action.text;
-      this._renderComponentsTree(this._state);
-    }
-    else if (action.type === ADD_MESSAGE) {
-      let msg = this._state.dialogs.messages.currentTypedText;
-      const newId = this._generateId(this._state.profile.posts);
-      const newMessage = {id: newId, message: msg};
-      this._state.dialogs.messages.push(newMessage);
-      this._state.dialogs.messages.currentTypedText = '';
-      this._renderComponentsTree(this._state);
-    }
+    this._state.profile = renderProfile(this._state.profile, action);
+    this._state.dialogs = renderDialogs(this._state.dialogs, action);
+    
+    this._renderComponentsTree(this._state);
   }
 }
-
-export const addPostActionCreator = () => ({type: ADD_POST});
-
-export const updatePostTextActionCreator = (text) => {
-  return {type: UPDATE_POST_TEXT, text: text}
-}
-
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-
-export const updateMessageTextActionCreator = (msg) => {
-  return {type: UPDATE_MESSAGE_TEXT, text: msg};
-}
-
-
-window.state = store.getState();
 
 
 export default store;
