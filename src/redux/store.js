@@ -1,5 +1,6 @@
-import renderDialogs from "./dialogsReducer";
-import renderProfile from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import navbarReducer from "./navbarReducer";
+import profileReducer from "./profileReducer";
 
 const store = {
   // private data
@@ -73,8 +74,10 @@ const store = {
   },
 
   dispatch(action) {
-    this._state.profile = renderProfile(this._state.profile, action);
-    this._state.dialogs = renderDialogs(this._state.dialogs, action);
+    debugger;
+    this._state.profile = profileReducer(this._state.profile, action);
+    this._state.dialogs = dialogsReducer(this._state.dialogs, action);
+    this._state.navbar = navbarReducer(this._state.navbar, action);
     
     this._renderComponentsTree(this._state);
   }
