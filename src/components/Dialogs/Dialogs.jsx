@@ -1,8 +1,6 @@
-import React from 'react';
 import s from './Dialogs.module.css';
 import User from './User/User';
 import Message from './Message/Message';
-import { addMessageActionCreator, updateMessageTextActionCreator } from '../../redux/dialogsReducer';
 
 const Dialogs = (props) => {
 
@@ -13,13 +11,13 @@ const Dialogs = (props) => {
     .map(msg => <Message message={msg.message} />);
 
 
-  const sendMessage = () => {
-    props.dispatch(addMessageActionCreator());
+  const onSendMessage = () => {
+    props.sendMessage();
   }
 
-  const updateInputText = (event) => {
+  const onUpdateInputText = (event) => {
     let msg = event.target.value;
-    props.dispatch(updateMessageTextActionCreator(msg));
+    props.updateInputText(msg);
   }
 
   return (
@@ -33,8 +31,8 @@ const Dialogs = (props) => {
           {messagesElements}
         </div>
         <div className={s.inputArea}>
-          <textarea onChange={updateInputText} value={props.dialogs.currentTypedText} placeholder='Write a message...'></textarea>
-          <button onClick={sendMessage}>Send</button>
+          <textarea onChange={onUpdateInputText} value={props.dialogs.currentTypedText} placeholder='Write a message...'></textarea>
+          <button onClick={onSendMessage}>Send</button>
         </div>
       </div>
     </div>

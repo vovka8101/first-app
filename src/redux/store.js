@@ -43,6 +43,9 @@ const store = {
   },
   _renderComponentsTree() {},
   // public methods
+  generateId(arr) {
+    return arr[arr.length - 1].id + 1;
+  },
   getState() {
     return this._state;
   },
@@ -66,7 +69,7 @@ const store = {
   },
   addMessage() {
     let msg = this._state.dialogs.messages.currentTypedText;
-    const newId = this._generateId(this._state.profile.posts);
+    const newId = this._generateId(this._state.dialogs.messages);
     const newMessage = {id: newId, message: msg};
     this._state.dialogs.messages.push(newMessage);
     this._state.dialogs.messages.currentTypedText = '';
