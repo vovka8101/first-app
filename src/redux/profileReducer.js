@@ -17,7 +17,6 @@ let initialState = {
 }
 
 const profileReducer = (state = initialState, action) => {
-  debugger;
   switch (action.type) {
     case UPDATE_POST_TEXT:
       state.changeTextareaMsg = action.text;

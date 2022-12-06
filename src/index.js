@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/reduxStore';
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -12,7 +13,9 @@ const renderComponentsTree = (state) => {
   root.render(
     <BrowserRouter>
       <React.StrictMode>
-        <App store={store} />
+        <Provider store={store}>
+          <App />
+        </Provider>
       </React.StrictMode>
     </BrowserRouter>
   );
