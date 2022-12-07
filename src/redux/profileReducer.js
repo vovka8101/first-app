@@ -17,26 +17,27 @@ let initialState = {
 }
 
 const profileReducer = (state = initialState, action) => {
-  let stateCopy = {...state};
   switch (action.type) {
-    case UPDATE_POST_TEXT: {
-      stateCopy.changeTextareaMsg = action.text;
-      break;
-    }
+    case UPDATE_POST_TEXT:
+      return {
+        ...state,
+        changeTextareaMsg: action.text
+      }
     case ADD_POST: {
-      stateCopy.posts = [...state.posts];
-      let msg = stateCopy.changeTextareaMsg;
-      const newId = generateId(stateCopy.posts);
+      let msg = state.changeTextareaMsg;
+      const newId = generateId(state.posts);
       const newPost = {id: newId, message: msg, likesCount: 0, imgSrc: 'https://picsum.photos/id/299/200/200'};
-      stateCopy.posts.push(newPost);
-      stateCopy.changeTextareaMsg = '';
-      break;
+      return {
+        ...state,
+        posts: [...state.posts, newPost],
+        changeTextareaMsg: ''
+      }
     }
     default:
       break;
   }
 
-  return stateCopy;
+  return state;
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST});
