@@ -77,12 +77,11 @@ const store = {
   },
 
   dispatch(action) {
-    debugger;
     this._state.profile = profileReducer(this._state.profile, action);
     this._state.dialogs = dialogsReducer(this._state.dialogs, action);
     this._state.navbar = navbarReducer(this._state.navbar, action);
     
-    this._renderComponentsTree(this._state);
+    // this._renderComponentsTree(this._state);
   }
 }
 

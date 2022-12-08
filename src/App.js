@@ -11,12 +11,10 @@ const App = () => {
     <div className='app-wrapper'>
       <Header />
       <NavbarContainer />
-      <div className='app-wrapper-content'>
+      <div className='app-wrapper__content'>
         <Routes>
-          <Route path='/profile' element={<Profile />}
-          />
-          <Route path='/dialogs/*' element={<DialogsContainer />}
-          />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/dialogs/*' element={<DialogsContainer />} />
         </Routes>
       </div>
     </div>

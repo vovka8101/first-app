@@ -1,3 +1,9 @@
+nav {
+  grid-area: nav;
+  background-color: rgb(0, 100, 97);
+  text-align: center;
+}
+
 .menuNav {
   color: white;
 }

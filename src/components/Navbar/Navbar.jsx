@@ -4,7 +4,7 @@ import Friend from './Friends/Friend';
 
 const Navbar = (props) => {
   const friends = props.friends
-    .map(el => <Friend name={el.name} photo={el.photo} />)
+    .map(el => <Friend name={el.name} photo={el.photo} key={el.id} />)
 
   return (
     <nav className={s.menuNav}>

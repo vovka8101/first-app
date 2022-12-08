@@ -10,7 +10,6 @@ ul, p, h1, h2, h3, h4 {
 .app-wrapper {
   display: grid;
   max-width: 1200px;
-  /* height: 100vh; */
   margin: auto;
   grid-template-columns: minmax(100px, 200px) 1fr;
   grid-template-areas: "header header"
@@ -18,7 +17,6 @@ ul, p, h1, h2, h3, h4 {
   grid-gap: 15px;
 }
 
-.app-wrapper-content {
+.app-wrapper__content {
   grid-area: main;
-  /* border: 1px solid black; */
 }
