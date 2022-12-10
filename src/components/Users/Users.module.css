@@ -1,0 +1,56 @@
+.content h2 {
+  font-size: 2em;
+  font-style: italic;
+  color: #002d26;
+  margin-bottom: 15px;
+}
+
+.container {
+  min-height: 150px;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
+
+.container + .container {
+  margin-top: 30px;
+}
+
+.userPhoto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.userPhoto button {
+  margin: 0 auto;
+  min-width: 50%;
+}
+
+.ava img{
+  width: 60%;
+  min-width: 80px;
+  border-radius: 50%;
+}
+
+.userDescription {
+  display: grid;
+  height: 65%;
+  padding: 15px;
+  grid-template-columns: 3fr 1fr;
+  border: 1px solid grey;
+  border-radius: 20px;
+}
+
+.col1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.col2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+}

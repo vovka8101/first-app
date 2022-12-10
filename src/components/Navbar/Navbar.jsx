@@ -13,6 +13,7 @@ const Navbar = (props) => {
         <li><NavLink to="/dialogs" className={navData => navData.isActive ? s.active : undefined}>Messages</NavLink></li>
         <li><NavLink to="#">News</NavLink></li>
         <li><NavLink to="#">Music</NavLink></li>
+        <li><NavLink to="/users" className={navData => navData.isActive ? s.active : undefined}>Users</NavLink></li>
         <li><NavLink to="#">Settings</NavLink></li>
       </ul>
       <h3 className={s.friendTitle}>Friends</h3>

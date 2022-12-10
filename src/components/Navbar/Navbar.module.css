@@ -17,7 +17,11 @@ nav {
   margin: 10px;
 }
 
-.navbarItems li:last-child {
+.navbarItems li:nth-child(5) {
+  margin-top: 30px;
+}
+
+.navbarItems li:nth-child(6) {
   margin-top: 30px;
 }
 
@@ -37,4 +41,10 @@ nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 24px;
+}
+
+@media screen and (max-width: 600px) {
+  .friendsList {
+    grid-template-columns: 1fr 1fr;
+  }
 }
