@@ -7,13 +7,36 @@ class Users extends React.Component {
   constructor(props) {
     super(props);
     axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-      this.props.setUsers(response.data.items);
+      this.props.setUsers(response.data);
     });
+  }
+
+  onSetCurrent(page) {
+    this.props.setCurrent(page);
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`).then(response => {
+        this.props.setUsers(response.data);
+      })
   }
   
   render() {
+    let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize);
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+      pages.push(i);
+    }
+    let curP = this.props.currentPage;
+    let curPF = ((curP - 5) < 0 ? 0 : curP - 4); // current page first
+    let slicedPages = [
+      (curP !== 1 && curP > 4) ? 1 : undefined,
+      ...pages.slice(curPF, curPF + 5), 
+      (curP !== pagesCount && curP < pagesCount - 5) ? pagesCount : undefined];
     return (
       <div className={s.content}>
+        <div className={s.pagesBlock}>
+          {slicedPages.map(p => {
+            return <span className={`${p === curP && s.pageItem_active} ${s.pageItem}`} onClick={e => {this.onSetCurrent(p)}}>{p}</span>
+          })}
+        </div>
         <h2>Users</h2>
         {this.props.users.map(el => {
           return (
