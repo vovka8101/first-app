@@ -59,7 +59,7 @@ export const setUsersAC = (usersPage) => {
 }
 
 export const setCurrentAC = (pageNumber) => {
-  return {type: SET_CURRENT, page: pageNumber}
+  return {type: SET_CURRENT, page: pageNumber};
 }
 
 export default usersReducer;
