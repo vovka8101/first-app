@@ -1,13 +1,15 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS'
-const SET_CURRENT = 'SET_CURRENT'
+const SET_USERS = 'SET_USERS';
+const SET_CURRENT = 'SET_CURRENT';
+const SET_FETCHING = 'SET_FETCHING';
 
 let initialState = {
   users: [],
   totalCount: 0,
   pageSize: 10,
-  currentPage: 1
+  currentPage: 1,
+  isFetching: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -41,6 +43,11 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         currentPage: action.page
       }
+    case SET_FETCHING:
+      return {
+        ...state,
+        isFetching: action.status
+      }
     default:
       break;
   }
@@ -60,6 +67,10 @@ export const setUsersAC = (usersPage) => {
 
 export const setCurrentAC = (pageNumber) => {
   return {type: SET_CURRENT, page: pageNumber};
+}
+
+export const setFetchingAC = (status) => {
+  return {type: SET_FETCHING, status};
 }
 
 export default usersReducer;
