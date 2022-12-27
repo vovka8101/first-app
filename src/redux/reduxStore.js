@@ -5,12 +5,12 @@ import profileReducer from "./profileReducer";
 import usersReducer from "./usersReducer";
 
 let reducers = combineReducers({
-  profile: profileReducer,
+  profilePage: profileReducer,
   dialogs: dialogsReducer,
   navbar: navbarReducer,
   usersPage: usersReducer
 });
 
 let store = createStore(reducers);
-
+// window.state = store;
 export default store;

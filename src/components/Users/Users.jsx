@@ -1,6 +1,7 @@
 import s from './Users.module.css';
 import userAva from '../../assets/images/userAva.jpg';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalCount / props.pageSize);
@@ -14,6 +15,7 @@ const Users = (props) => {
     (curP !== 1 && curP > 4) ? 1 : undefined,
     ...pages.slice(curPF, curPF + 5),
     (curP !== pagesCount && curP < pagesCount - 5) ? pagesCount : undefined];
+
   return (
     <div className={s.content}>
       <div className={s.pagesBlock}>
@@ -26,7 +28,11 @@ const Users = (props) => {
         return (
           <div className={s.container}>
             <div className={s.userPhoto}>
-              <div className={s.ava}><img src={el.photos.small !== null ? el.photos.small : userAva} alt="User ava" /></div>
+              <div className={s.ava}>
+                <NavLink to={"/profile/" + el.id}>
+                  <img src={el.photos.small !== null ? el.photos.small : userAva} alt="User ava" />
+                </NavLink>
+              </div>
               {el.followed
                 ? <button onClick={() => props.unfollow(el.id)}>Unfollow</button>
                 : <button onClick={() => props.follow(el.id)}>Follow</button>}

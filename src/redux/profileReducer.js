@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 const generateId = (arr) => {
   return arr[arr.length - 1].id + 1;
@@ -13,7 +14,8 @@ let initialState = {
     { id: 4, message: 'New post test', likesCount: 8, imgSrc: 'https://picsum.photos/id/98/200/200' },
     { id: 5, message: 'New post from index.js', likesCount: 3, imgSrc: 'https://picsum.photos/id/299/200/200' }
   ],
-  changeTextareaMsg: ''
+  changeTextareaMsg: '',
+  profile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -33,6 +35,9 @@ const profileReducer = (state = initialState, action) => {
         changeTextareaMsg: ''
       }
     }
+    case SET_USER_PROFILE: {
+      return {...state, profile: action.profile};
+    }
     default:
       break;
   }
@@ -43,8 +48,11 @@ const profileReducer = (state = initialState, action) => {
 export const addPostActionCreator = () => ({type: ADD_POST});
 
 export const updatePostTextActionCreator = (text) => {
-  return {type: UPDATE_POST_TEXT, text: text}
+  return {type: UPDATE_POST_TEXT, text: text};
 }
 
+export const setUserProfile = (profile) => {
+  return {type: SET_USER_PROFILE, profile};
+}
 
 export default profileReducer;
