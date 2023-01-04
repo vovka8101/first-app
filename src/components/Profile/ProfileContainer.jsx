@@ -24,7 +24,6 @@ function withRouter(Component) {
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
-    debugger
     const profileId = this.props.router.params.profileId;
     axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + profileId)
       .then(response => { this.props.setUserProfile(response.data) });
