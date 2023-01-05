@@ -8,7 +8,9 @@ import Preloader from '../../assets/common/Preloader';
 class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.toggleFetching(true);
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users', {
+      withCredentials: true
+    }).then(response => {
       this.props.setUsers(response.data);
       this.props.toggleFetching(false);
     });
@@ -17,7 +19,9 @@ class UsersContainer extends React.Component {
   onSetCurrent = (page) => {
     this.props.setCurrent(page);
     this.props.toggleFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`).then(response => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`, {
+      withCredentials: true
+    }).then(response => {
       this.props.setUsers(response.data);
       this.props.toggleFetching(false);
     })
