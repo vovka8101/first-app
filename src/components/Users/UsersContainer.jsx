@@ -1,17 +1,15 @@
 import Users from './Users'
 import { connect } from "react-redux";
 import React from 'react';
-import axios from 'axios';
 import { follow, setCurrent, toggleFetching, setUsers, unfollow } from "../../redux/usersReducer";
 import Preloader from '../../assets/common/Preloader';
+import { usersData } from '../../api/UsersApi';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
     this.props.toggleFetching(true);
-    axios.get('https://social-network.samuraijs.com/api/1.0/users', {
-      withCredentials: true
-    }).then(response => {
-      this.props.setUsers(response.data);
+    usersData.getUsers().then(data => {
+      this.props.setUsers(data);
       this.props.toggleFetching(false);
     });
   }
@@ -19,10 +17,8 @@ class UsersContainer extends React.Component {
   onSetCurrent = (page) => {
     this.props.setCurrent(page);
     this.props.toggleFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}`, {
-      withCredentials: true
-    }).then(response => {
-      this.props.setUsers(response.data);
+    usersData.getUsers(page).then(data => {
+      this.props.setUsers(data);
       this.props.toggleFetching(false);
     })
   }
