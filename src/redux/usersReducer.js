@@ -3,13 +3,15 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT = 'SET_CURRENT';
 const SET_FETCHING = 'SET_FETCHING';
+const SET_FOLLOWING_PROCESS = 'SET_FOLLOWING_PROCESS';
 
 let initialState = {
   users: [],
   totalCount: 0,
   pageSize: 10,
   currentPage: 1,
-  isFetching: false
+  isFetching: false,
+  isFollowInProcess: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -48,6 +50,13 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isFetching: action.status
       }
+    case SET_FOLLOWING_PROCESS:
+      return {
+        ...state,
+        isFollowInProcess: action.isFollowing
+          ? [...state.isFollowInProcess, action.userId]
+          : state.isFollowInProcess.filter(el => el !== action.userId)
+      }
     default:
       break;
   }
@@ -71,6 +80,10 @@ export const setCurrent = (pageNumber) => {
 
 export const toggleFetching = (status) => {
   return {type: SET_FETCHING, status};
+}
+
+export const toggleFollowingProcess = (isFollowing, userId) => {
+  return {type: SET_FOLLOWING_PROCESS, isFollowing, userId};
 }
 
 export default usersReducer;
