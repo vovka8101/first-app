@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setUserProfile } from '../../redux/profileReducer';
+import { getProfile } from '../../redux/profileReducer';
 import Profile from './Profile';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { usersData } from '../../api/UsersApi';
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
 function withRouter(Component) {
@@ -25,8 +24,7 @@ function withRouter(Component) {
 class ProfileContainer extends React.Component {
   componentDidMount() {
     const profileId = this.props.router.params.profileId;
-    usersData.getProfile(profileId)
-      .then(data => { this.props.setUserProfile(data) });
+    this.props.getProfile(profileId);
   }
 
   render() {
@@ -36,4 +34,4 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => ({ profile: state.profilePage.profile })
 
-export default connect(mapStateToProps, {setUserProfile})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, { getProfile })(withRouter(ProfileContainer));

@@ -1,3 +1,5 @@
+import { usersData } from "../api/UsersApi";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -28,7 +30,7 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST: {
       let msg = state.changeTextareaMsg;
       const newId = generateId(state.posts);
-      const newPost = {id: newId, message: msg, likesCount: 0, imgSrc: 'https://picsum.photos/id/299/200/200'};
+      const newPost = { id: newId, message: msg, likesCount: 0, imgSrc: 'https://picsum.photos/id/299/200/200' };
       return {
         ...state,
         posts: [...state.posts, newPost],
@@ -36,7 +38,7 @@ const profileReducer = (state = initialState, action) => {
       }
     }
     case SET_USER_PROFILE: {
-      return {...state, profile: action.profile};
+      return { ...state, profile: action.profile };
     }
     default:
       break;
@@ -45,14 +47,21 @@ const profileReducer = (state = initialState, action) => {
   return state;
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPostActionCreator = () => ({ type: ADD_POST });
 
 export const updatePostTextActionCreator = (text) => {
-  return {type: UPDATE_POST_TEXT, text: text};
+  return { type: UPDATE_POST_TEXT, text: text };
 }
 
 export const setUserProfile = (profile) => {
-  return {type: SET_USER_PROFILE, profile};
+  return { type: SET_USER_PROFILE, profile };
+}
+
+export const getProfile = (profileId) => {
+  return (dispatch) => {
+    usersData.getProfile(profileId)
+      .then(data => { dispatch(setUserProfile(data)) });
+  }
 }
 
 export default profileReducer;

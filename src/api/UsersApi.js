@@ -21,5 +21,9 @@ export const usersData = {
   unfollow(userId) {
     return instance.delete(`follow/${userId}`)
       .then(response => response.data.resultCode)
+  },
+  userAuth() {
+    return instance.get('auth/me')
+      .then(response => response.data)
   }
 };
