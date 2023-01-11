@@ -2,7 +2,6 @@ import s from './Users.module.css';
 import userAva from '../../assets/images/userAva.jpg';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalCount / props.pageSize);
@@ -35,33 +34,10 @@ const Users = (props) => {
                 </NavLink>
               </div>
               {el.followed
-                ? <button disabled={props.isFollowingProcess.some(item => item === el.id)} onClick={() => {
-                  props.toggleFollowingProcess(true, el.id);
-                  axios.delete('https://social-network.samuraijs.com/api/1.0/follow/' + el.id, {
-                    withCredentials: true
-                    // headers: {
-                    //   'API-KEY': 'e293e8b9-5e60-4616-9bdf-425791f224e8'
-                    // }
-                  })
-                    .then(response => {
-                      if (response.data.resultCode === 0) {
-                        props.unfollow(el.id);
-                        props.toggleFollowingProcess(false, el.id);
-                      }
-                    })
-                }}>Unfollow</button>
-                : <button disabled={props.isFollowingProcess.some(item => item === el.id)} onClick={() => {
-                  props.toggleFollowingProcess(true, el.id);
-                  axios.post('https://social-network.samuraijs.com/api/1.0/follow/' + el.id, {}, {
-                    withCredentials: true
-                  })
-                    .then(response => {
-                      if (response.data.resultCode === 0) {
-                        props.follow(el.id);
-                        props.toggleFollowingProcess(false, el.id);
-                      }
-                    })
-                }}>Follow</button>
+                ? <button disabled={props.isFollowingProcess.some(item => item === el.id)}
+                  onClick={() => { props.unfollow(el.id) }}>Unfollow</button>
+                : <button disabled={props.isFollowingProcess.some(item => item === el.id)}
+                  onClick={() => { props.follow(el.id) }}>Follow</button>
               }
             </div>
             <div className={s.userDescription}>

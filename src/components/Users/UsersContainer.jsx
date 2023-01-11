@@ -1,26 +1,16 @@
 import Users from './Users'
 import { connect } from "react-redux";
 import React from 'react';
-import { follow, setCurrent, toggleFetching, setUsers, unfollow, toggleFollowingProcess } from "../../redux/usersReducer";
+import { follow, unfollow, toggleFollowingProcess, getUsers } from "../../redux/usersReducer";
 import Preloader from '../../assets/common/Preloader';
-import { usersData } from '../../api/UsersApi';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleFetching(true);
-    usersData.getUsers().then(data => {
-      this.props.setUsers(data);
-      this.props.toggleFetching(false);
-    });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onSetCurrent = (page) => {
-    this.props.setCurrent(page);
-    this.props.toggleFetching(true);
-    usersData.getUsers(page).then(data => {
-      this.props.setUsers(data);
-      this.props.toggleFetching(false);
-    })
+    this.props.getUsers(page);
   }
 
   render() {
@@ -53,4 +43,7 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, { follow, unfollow, setUsers, setCurrent, toggleFetching, toggleFollowingProcess })(UsersContainer);
+export default connect(mapStateToProps, {
+  follow, unfollow,
+  toggleFollowingProcess, getUsers
+})(UsersContainer);
