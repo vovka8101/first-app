@@ -10,14 +10,13 @@ const Dialogs = (props) => {
   const messagesElements = props.dialogs.messages
     .map(msg => <Message message={msg.message} key={msg.id} />);
 
-
   const onSendMessage = () => {
-    props.sendMessage();
+    props.addMessage();
   }
 
   const onUpdateInputText = (event) => {
     let msg = event.target.value;
-    props.updateInputText(msg);
+    props.updateMessageText(msg);
   }
 
   return (
