@@ -16,3 +16,24 @@
 .description p + p{
   margin-top: 10px;
 }
+
+.status {
+  margin-bottom: 20px;
+}
+
+.statusTitle {
+  font-size: 1.3em;
+}
+
+.statusText {
+  font-weight: 500;
+}
+
+.statusText:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.statusInputField {
+  font-size: 1.4em;
+}
