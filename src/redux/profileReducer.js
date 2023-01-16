@@ -1,8 +1,9 @@
-import { usersData } from "../api/UsersApi";
+import { profileAPI } from "../api/UsersApi";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 
 const generateId = (arr) => {
   return arr[arr.length - 1].id + 1;
@@ -17,7 +18,8 @@ let initialState = {
     { id: 5, message: 'New post from index.js', likesCount: 3, imgSrc: 'https://picsum.photos/id/299/200/200' }
   ],
   changeTextareaMsg: '',
-  profile: null
+  profile: null,
+  profileStatus: ''
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -40,6 +42,9 @@ const profileReducer = (state = initialState, action) => {
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile };
     }
+    case SET_PROFILE_STATUS: {
+      return { ...state, status: action.status }
+    }
     default:
       break;
   }
@@ -47,6 +52,7 @@ const profileReducer = (state = initialState, action) => {
   return state;
 }
 
+// ----------------------- Action Creators -----------------------
 export const addPostActionCreator = () => ({ type: ADD_POST });
 
 export const updatePostTextActionCreator = (text) => {
@@ -57,10 +63,35 @@ export const setUserProfile = (profile) => {
   return { type: SET_USER_PROFILE, profile };
 }
 
+export const setProfileStatus = (status) => {
+  return { type: SET_PROFILE_STATUS, status };
+}
+
+// ----------------------- Redux-Thunk -----------------------
 export const getProfile = (profileId) => {
   return (dispatch) => {
-    usersData.getProfile(profileId)
+    profileAPI.getProfile(profileId)
       .then(data => { dispatch(setUserProfile(data)) });
+  }
+}
+
+export const getProfileStatus = (profileId) => {
+  return (dispatch) => {
+    profileAPI.getProfileStatus(profileId)
+      .then(status => { dispatch(setProfileStatus(status)) })
+  }
+}
+
+export const updateProfileStatus = (status) => {
+  return (dispatch) => {
+    profileAPI.updateProfileStatus(status)
+      .then(response => {
+        if (response.data.resultCode === 0) {
+          dispatch(setProfileStatus(status));
+        } else {
+          console.log('Error to update profile status');
+        }
+      })
   }
 }
 

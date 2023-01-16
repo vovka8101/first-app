@@ -11,7 +11,7 @@ const ProfileInfo = (props) => {
       </div>
       <div className={s.description}>
         <h2>{props.fullName}</h2>
-        <StatusInfo />
+        <StatusInfo status={props.status} updateProfileStatus={props.updateProfileStatus} />
         <p>About me: {props.aboutMe}</p>
         <p>Looking for a job: {props.lookingForAJob ? 'Yes' : 'No'}</p>
         <p>Looking For A Job Description: {props.lookingForAJobDescription}</p>

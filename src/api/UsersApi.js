@@ -10,10 +10,6 @@ export const usersData = {
     return instance.get(`users?page=${pageNumber}&count=${pageSize}`)
       .then(response => response.data)
   },
-  getProfile(profileId) {
-    return instance.get(`profile/${profileId}`)
-      .then(response => response.data)
-  },
   follow(userId) {
     return instance.post(`follow/${userId}`)
       .then(response => response.data.resultCode)
@@ -25,5 +21,19 @@ export const usersData = {
   userAuth() {
     return instance.get('auth/me')
       .then(response => response.data)
+  }
+};
+
+export const profileAPI = {
+  getProfile(profileId) {
+    return instance.get(`profile/${profileId}`)
+      .then(response => response.data)
+  },
+  getProfileStatus(profileId) {
+    return instance.get(`profile/status/${profileId}`)
+      .then(response => response.data)
+  },
+  updateProfileStatus(status) {
+    return instance.put(`profile/status`, { status });
   }
 };

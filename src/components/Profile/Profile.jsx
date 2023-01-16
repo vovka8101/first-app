@@ -12,7 +12,7 @@ const Profile = (props) => {
       <div className={s.natureImg}>
         <img className={s.nature} src="https://picsum.photos/id/110/1200/600" alt="picsum img" />
       </div>
-      <ProfileInfo {...props.profile}/>
+      <ProfileInfo {...props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus} />
       <PostsContainer />
     </div>
   );

@@ -3,8 +3,18 @@ import s from '../ProfileInfo.module.css';
 
 class StatusInfo extends React.Component {
   state = {
-    statusText: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
+    statusText: this.props.status,
     editMode: false
+  }
+
+  onStatusChange = (e) => {
+    let status = e.target.value;
+    this.setState({ statusText: status });
+  }
+
+  onStatusUpdate = () => {
+    this.props.updateProfileStatus(this.state.statusText);
+    this.setState({ editMode: false });
   }
 
   render() {
@@ -14,16 +24,12 @@ class StatusInfo extends React.Component {
           <span className={s.statusTitle}>Status: </span>
           {!this.state.editMode &&
             <span onClick={() => { this.setState({ editMode: true }) }}
-              className={s.statusText}>{this.state.statusText}</span>
+              className={s.statusText}>{this.props.status || "N/A"}</span>
           }
           {this.state.editMode &&
             <input className={s.statusInputField} type="text" value={this.state.statusText}
-              autoFocus={true} onBlur={() => { 
-                this.setState({ editMode: false, statusText: this.state.statusText }) 
-              }} 
-              onChange={(e) => {
-                this.setState({statusText: e.target.value})
-              }} />
+              autoFocus={true} onBlur={this.onStatusUpdate}
+              onChange={this.onStatusChange} />
           }
         </p>
       </div>
