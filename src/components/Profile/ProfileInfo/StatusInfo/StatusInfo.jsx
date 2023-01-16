@@ -7,6 +7,14 @@ class StatusInfo extends React.Component {
     editMode: false
   }
 
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.status !== this.props.status) {
+      this.setState({ statusText: this.props.status });
+    }
+  }
+
+
   onStatusChange = (e) => {
     let status = e.target.value;
     this.setState({ statusText: status });
