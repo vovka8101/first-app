@@ -1,7 +1,6 @@
 import { profileAPI } from "../api/UsersApi";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 
@@ -17,26 +16,19 @@ let initialState = {
     { id: 4, message: 'New post test', likesCount: 8, imgSrc: 'https://picsum.photos/id/98/200/200' },
     { id: 5, message: 'New post from index.js', likesCount: 3, imgSrc: 'https://picsum.photos/id/299/200/200' }
   ],
-  changeTextareaMsg: '',
   profile: null,
   profileStatus: ''
 }
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_POST_TEXT:
-      return {
-        ...state,
-        changeTextareaMsg: action.text
-      }
     case ADD_POST: {
-      let msg = state.changeTextareaMsg;
       const newId = generateId(state.posts);
-      const newPost = { id: newId, message: msg, likesCount: 0, imgSrc: 'https://picsum.photos/id/299/200/200' };
+      const newPost = { id: newId, message: action.postMessage, likesCount: 0, imgSrc: 'https://picsum.photos/id/299/200/200' };
+      debugger;
       return {
         ...state,
-        posts: [...state.posts, newPost],
-        changeTextareaMsg: ''
+        posts: [newPost, ...state.posts]
       }
     }
     case SET_USER_PROFILE: {
@@ -45,19 +37,12 @@ const profileReducer = (state = initialState, action) => {
     case SET_PROFILE_STATUS: {
       return { ...state, status: action.status }
     }
-    default:
-      break;
+    default: return state;
   }
-
-  return state;
 }
 
 // ----------------------- Action Creators -----------------------
-export const addPostActionCreator = () => ({ type: ADD_POST });
-
-export const updatePostTextActionCreator = (text) => {
-  return { type: UPDATE_POST_TEXT, text: text };
-}
+export const addPost = (postMessage) => ({ type: ADD_POST, postMessage });
 
 export const setUserProfile = (profile) => {
   return { type: SET_USER_PROFILE, profile };

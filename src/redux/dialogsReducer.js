@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
 
 const generateId = (arr) => {
   return arr[arr.length - 1].id + 1;
@@ -20,37 +19,22 @@ let initialState = {
     { id: 3, message: 'Lorem ipsum dolor sit amet consectetur adipisicing.' },
     { id: 4, message: 'New message' }
   ],
-  currentTypedText: ''
 }
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_MESSAGE_TEXT:
-      return {
-        ...state,
-        currentTypedText: action.text
-      }  
     case ADD_MESSAGE: {
-      let msg = state.currentTypedText;
       const newId = generateId(state.messages);
-      const newMessage = {id: newId, message: msg};
+      const newMessage = {id: newId, message: action.message};
       return {
         ...state,
-        messages: [...state.messages, newMessage],
-        currentTypedText: ''
+        messages: [...state.messages, newMessage]
       }
     }
-    default:
-      break;
+    default: return state;
   }
-
-  return state;
 }
 
-export const addMessage = () => ({type: ADD_MESSAGE});
-
-export const updateMessageText = (msg) => {
-  return {type: UPDATE_MESSAGE_TEXT, text: msg};
-}
+export const addMessage = (message) => ({type: ADD_MESSAGE, message});
 
 export default dialogsReducer;

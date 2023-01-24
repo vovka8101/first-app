@@ -7,8 +7,3 @@
   font-weight: normal;
   margin-top: 20px;
 }
-
-.postsContent .posts {
-  display: flex;
-  flex-direction: column-reverse;
-}

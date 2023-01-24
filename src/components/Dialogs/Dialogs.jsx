@@ -1,6 +1,8 @@
 import s from './Dialogs.module.css';
 import User from './User/User';
 import Message from './Message/Message';
+import { Formik, Form, Field } from 'formik';
+
 
 const Dialogs = (props) => {
 
@@ -10,31 +12,35 @@ const Dialogs = (props) => {
   const messagesElements = props.dialogs.messages
     .map(msg => <Message message={msg.message} key={msg.id} />);
 
-  const onSendMessage = () => {
-    props.addMessage();
-  }
-
-  const onUpdateInputText = (event) => {
-    let msg = event.target.value;
-    props.updateMessageText(msg);
-  }
-
   return (
     <div className={s.content}>
       <h2>Dialogs</h2>
+
       <div className={s.dialogs}>
         <div className={s.users}>
           {usersElements}
         </div>
+
         <div className={s.messages}>
           {messagesElements}
         </div>
-        <div className={s.inputArea}>
-          <textarea onChange={onUpdateInputText} value={props.dialogs.currentTypedText} placeholder='Write a message...'></textarea>
-          <button onClick={onSendMessage}>Send</button>
-        </div>
+
+        <Formik
+          initialValues={{ message: '' }}
+          onSubmit={(values, { resetForm }) => {
+            props.addMessage(values.message);
+            resetForm({ values: '' })
+          }}
+        >
+          {({ values }) => (
+            <Form className={s.inputArea}>
+              <Field as="textarea" name="message" placeholder="Write a message..." />
+              <button type="submit" disabled={!values.message}>Send</button>
+            </Form>
+          )}
+        </Formik>
       </div>
-    </div>
+    </div >
   );
 }
 
