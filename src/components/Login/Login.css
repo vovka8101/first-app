@@ -1,0 +1,68 @@
+.form {
+  margin: 100px auto;
+  max-width: 300px;
+  border: 1px solid #446d7e;
+}
+
+.sign-in {
+  background-color: #f0f0f0;
+  color: #2b2b2b;
+  font-size: 1.2em;
+  border-bottom: 1px solid #446d7e;
+  padding: 10px
+}
+
+.form-content {
+  background-color: #f9f9f9;
+  padding: 10px;
+}
+
+.form-control {
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.error {
+  color: red;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.remember {
+  display: inline-block;
+}
+
+input[type="text"],
+input[type="password"] {
+  display: block;
+  padding: 5px;
+  width: 250px;
+  font-size: 18px;
+  border: 1px solid #446d7e;
+  border-radius: 5px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  box-shadow: 0 0 10px 0 #6799a8;
+  outline: 0;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  background-color:lightseagreen;
+  color: white;
+  border: 1px solid blue;
+  font-size: 1.2em;
+  border-radius: 8px;
+  padding: 5px 20px;
+}
+
+button:hover {
+  background-color: lightskyblue;
+  color: black;
+}
