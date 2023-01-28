@@ -2,6 +2,9 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import ErrorMsg from "./ErrorMsg";
 import './Login.css';
+import { connect } from 'react-redux';
+import { Navigate } from "react-router-dom";
+import { login } from "../../redux/authReducer";
 
 const validationLoginForm = (values) => {
   const errors = {};
@@ -23,6 +26,11 @@ const validationSchemaLoginForm = Yup.object().shape({
 
 
 const Login = (props) => {
+
+  if (props.isAuth) {
+    return <Navigate to='/profile' />
+  }
+
   return (
     <div className="form">
       <h2 className="sign-in">Sign in</h2>
@@ -32,7 +40,7 @@ const Login = (props) => {
           password: '',
           rememberMe: false
         }}
-        onSubmit={(values) => { console.log(values) }}
+        onSubmit={(values) => { props.login(values) }}
         validate={validationLoginForm}
         validationSchema={validationSchemaLoginForm}
       >
@@ -56,7 +64,7 @@ const Login = (props) => {
               </label>
             </div>
 
-            <button type="submit">Sign In</button>
+            <button type="submit" className="sign-in-button">Sign In</button>
           </Form>
         )}
       </Formik>
@@ -64,4 +72,8 @@ const Login = (props) => {
   )
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, { login })(Login);

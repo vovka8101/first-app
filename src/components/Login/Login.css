@@ -51,7 +51,7 @@ input[type="password"]:focus {
   outline: 0;
 }
 
-button {
+.sign-in-button {
   display: block;
   margin: 0 auto;
   background-color:lightseagreen;
@@ -62,7 +62,7 @@ button {
   padding: 5px 20px;
 }
 
-button:hover {
+.sign-in-button:hover {
   background-color: lightskyblue;
   color: black;
 }

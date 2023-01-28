@@ -17,10 +17,6 @@ export const usersData = {
   unfollow(userId) {
     return instance.delete(`follow/${userId}`)
       .then(response => response.data.resultCode)
-  },
-  userAuth() {
-    return instance.get('auth/me')
-      .then(response => response.data)
   }
 };
 
@@ -35,5 +31,18 @@ export const profileAPI = {
   },
   updateProfileStatus(status) {
     return instance.put(`profile/status`, { status });
+  }
+};
+
+export const authAPI = {
+  userAuth() {
+    return instance.get('auth/me')
+      .then(response => response.data)
+  },
+  login(email, password, rememberMe) {
+    return instance.post('auth/login', { email, password, rememberMe })
+  },
+  logout() {
+    return instance.delete('auth/login')
   }
 };

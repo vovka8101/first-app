@@ -1,4 +1,4 @@
-import { usersData } from "../api/UsersApi";
+import { authAPI } from "../api/UsersApi";
 
 const SET_USER_AUTH = 'SET_USER_AUTH';
 
@@ -14,30 +14,51 @@ const authReducer = (state = initialState, action) => {
     case SET_USER_AUTH:
       return {
         ...state,
-        ...action.data,
-        isAuth: true
+        ...action.data
       }
     default:
       return state;
   }
 }
 
-export const setUserAuth = (id, email, login) => ({
+export const setUserAuth = (id, email, login, isAuth) => ({
   type: SET_USER_AUTH,
-  data: { id, email, login }
+  data: { id, email, login, isAuth }
 });
 
 export const userAuth = () => {
   return (dispatch) => {
-    usersData.userAuth().then(data => {
+    authAPI.userAuth().then(data => {
       if (data.resultCode === 0) {
         const { id, email, login } = data.data;
-        dispatch(setUserAuth(id, email, login));
+        dispatch(setUserAuth(id, email, login, true));
       } else {
         console.log(data.messages);
       }
     });
   }
+};
+
+export const login = ({ email, password, rememberMe }) => {
+  return (dispatch) => {
+    authAPI.login(email, password, rememberMe).then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(userAuth());
+      } else {
+        console.log(response.data.messages);
+      }
+    });
+  }
+}
+
+export const logout = () => (dispatch) => {
+  authAPI.logout().then(response => {
+    if (response.data.resultCode === 0) {
+      dispatch(setUserAuth(null, null, null, false));
+    } else {
+      console.log('error while logout', response.data.messages);
+    }
+  })
 }
 
 export default authReducer;
