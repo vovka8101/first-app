@@ -12,7 +12,7 @@ const validationLoginForm = (values) => {
   if (!values.email) {
     errors.email = 'Required!';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = 'Invalid email address!';
   }
 
   return errors;
@@ -40,12 +40,15 @@ const Login = (props) => {
           password: '',
           rememberMe: false
         }}
-        onSubmit={(values) => { props.login(values) }}
+        onSubmit={(values, { setStatus, setSubmitting }) => {
+          props.login(values, setStatus);
+          setSubmitting(false);
+        }}
         validate={validationLoginForm}
         validationSchema={validationSchemaLoginForm}
       >
-        {() => (
-          <Form className="form-content">
+        {(formik) => {
+          return <Form className="form-content">
             <div className="form-control">
               <label htmlFor="email">Email:</label>
               <Field type='text' name='email' />
@@ -62,11 +65,15 @@ const Login = (props) => {
               <label className="remember">
                 <Field type='checkbox' name='rememberMe' />Remember me
               </label>
+              <ErrorMsg>{formik.status}</ErrorMsg>
             </div>
 
-            <button type="submit" className="sign-in-button">Sign In</button>
+            <button type="submit" className="sign-in-button"
+              disabled={formik.isSubmitting}
+            >Sign In
+            </button>
           </Form>
-        )}
+        }}
       </Formik>
     </div>
   )

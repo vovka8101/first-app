@@ -33,19 +33,19 @@ export const userAuth = () => {
         const { id, email, login } = data.data;
         dispatch(setUserAuth(id, email, login, true));
       } else {
-        console.log(data.messages);
+        // console.log(data.messages);
       }
     });
   }
 };
 
-export const login = ({ email, password, rememberMe }) => {
+export const login = ({ email, password, rememberMe }, setStatus) => {
   return (dispatch) => {
     authAPI.login(email, password, rememberMe).then(response => {
       if (response.data.resultCode === 0) {
         dispatch(userAuth());
       } else {
-        console.log(response.data.messages);
+        setStatus(response.data.messages);
       }
     });
   }
