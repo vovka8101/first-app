@@ -25,6 +25,7 @@ export const initializeApp = () => {
     const promise = dispatch(userAuth());
 
     // Promise.all([promise]).then( ... ) if more than one promise
+    // Can also use async await...
     promise.then(() => {
       dispatch(setInitialized());
     });

@@ -88,10 +88,10 @@ export const toggleFollowingProcess = (isFollowing, userId) => {
   return { type: SET_FOLLOWING_PROCESS, isFollowing, userId };
 }
 
-export const getUsers = (pageNumber = 1, pageSize = 10) => {
+export const requestUsers = (pageNumber = 1, pageSize = 10) => {
   return (dispatch) => {
     dispatch(toggleFetching(true));
-    usersData.getUsers(pageNumber, pageSize).then(data => {
+    usersData.requestUsers(pageNumber, pageSize).then(data => {
       dispatch(setCurrent(pageNumber));
       dispatch(setUsers(data));
       dispatch(toggleFetching(false));
