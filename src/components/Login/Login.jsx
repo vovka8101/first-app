@@ -46,6 +46,7 @@ const Login = (props) => {
         }}
         validate={validationLoginForm}
         validationSchema={validationSchemaLoginForm}
+        validateOnMount
       >
         {(formik) => {
           return <Form className="form-content">
@@ -69,7 +70,7 @@ const Login = (props) => {
             </div>
 
             <button type="submit" className="sign-in-button"
-              disabled={formik.isSubmitting}
+              disabled={formik.isSubmitting || !formik.isValid}
             >Sign In
             </button>
           </Form>

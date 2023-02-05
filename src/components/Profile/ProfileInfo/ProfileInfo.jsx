@@ -1,5 +1,6 @@
 import s from './ProfileInfo.module.css';
-import StatusInfo from './StatusInfo/StatusInfo';
+// import StatusInfo from './StatusInfo/StatusInfo';
+import StatusInfoHooks from './StatusInfo/StatusInfoHooks';
 
 const ProfileInfo = (props) => {
   return (
@@ -11,7 +12,7 @@ const ProfileInfo = (props) => {
       </div>
       <div className={s.description}>
         <h2>{props.fullName}</h2>
-        <StatusInfo status={props.status} updateProfileStatus={props.updateProfileStatus} />
+        <StatusInfoHooks status={props.status} updateProfileStatus={props.updateProfileStatus} />
         <p>About me: {props.aboutMe}</p>
         <p>Looking for a job: {props.lookingForAJob ? 'Yes' : 'No'}</p>
         <p>Looking For A Job Description: {props.lookingForAJobDescription}</p>
