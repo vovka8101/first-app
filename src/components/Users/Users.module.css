@@ -54,19 +54,3 @@
   justify-content: space-around;
   align-items: flex-end;
 }
-
-.pagesBlock {
-  text-align: center;
-}
-
-.pageItem {
-  cursor: pointer;
-}
-
-.pageItem + .pageItem {
-  margin-left: 10px;
-}
-
-.pageItem_active {
-  font-weight: bold;
-}

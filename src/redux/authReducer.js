@@ -7,7 +7,7 @@ const initialState = {
   email: null,
   login: null,
   isAuth: false
-}
+};
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,7 +19,7 @@ const authReducer = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export const setUserAuth = (id, email, login, isAuth) => ({
   type: SET_USER_AUTH,
@@ -27,38 +27,38 @@ export const setUserAuth = (id, email, login, isAuth) => ({
 });
 
 export const userAuth = () => {
-  return (dispatch) => {
-    return authAPI.userAuth().then(data => {
-      if (data.resultCode === 0) {
-        const { id, email, login } = data.data;
-        dispatch(setUserAuth(id, email, login, true));
-      } else {
-        // console.log(data.messages);
-      }
-    });
+  return async (dispatch) => {
+    const data = await authAPI.userAuth();
+    
+    if (data.resultCode === 0) {
+      const { id, email, login } = data.data;
+      dispatch(setUserAuth(id, email, login, true));
+    } else {
+      // console.log(data.messages);
+    }
   }
 };
 
 export const login = ({ email, password, rememberMe }, setStatus) => {
-  return (dispatch) => {
-    authAPI.login(email, password, rememberMe).then(response => {
-      if (response.data.resultCode === 0) {
-        dispatch(userAuth());
-      } else {
-        setStatus(response.data.messages);
-      }
-    });
-  }
-}
+  return async (dispatch) => {
+    const response = await authAPI.login(email, password, rememberMe);
 
-export const logout = () => (dispatch) => {
-  authAPI.logout().then(response => {
     if (response.data.resultCode === 0) {
-      dispatch(setUserAuth(null, null, null, false));
+      dispatch(userAuth());
     } else {
-      console.log('error while logout', response.data.messages);
+      setStatus(response.data.messages);
     }
-  })
-}
+  }
+};
+
+export const logout = () => async (dispatch) => {
+  const response = await authAPI.logout();
+
+  if (response.data.resultCode === 0) {
+    dispatch(setUserAuth(null, null, null, false));
+  } else {
+    console.log('error while logout', response.data.messages);
+  }
+};
 
 export default authReducer;

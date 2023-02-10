@@ -1,5 +1,3 @@
-
-
 import { createSelector } from 'reselect';
 
 const getUsersSelector = (state) => {

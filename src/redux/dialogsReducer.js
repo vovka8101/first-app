@@ -19,7 +19,7 @@ let initialState = {
     { id: 3, message: 'Lorem ipsum dolor sit amet consectetur adipisicing.' },
     { id: 4, message: 'New message' }
   ],
-}
+};
 
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -33,7 +33,7 @@ const dialogsReducer = (state = initialState, action) => {
     }
     default: return state;
   }
-}
+};
 
 export const addMessage = (message) => ({type: ADD_MESSAGE, message});
 

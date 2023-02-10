@@ -5,10 +5,10 @@ let initialState = {
     { id: 3, name: 'New User', photo: 'https://picsum.photos/id/236/200/200' },
     { id: 4, name: 'Tony', photo: 'https://picsum.photos/id/11/200/200' }
   ]
-}
+};
 
 const navbarReducer = (state = initialState, action) => {
   return state;
-}
+};
 
 export default navbarReducer;

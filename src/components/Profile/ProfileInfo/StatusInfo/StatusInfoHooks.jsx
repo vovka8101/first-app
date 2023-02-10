@@ -1,34 +1,34 @@
 import { useEffect, useState } from 'react';
 import s from '../ProfileInfo.module.css';
 
-const StatusInfoHooks = (props) => {
+const StatusInfoHooks = ({ status, updateProfileStatus }) => {
 
   const [editMode, setEditMode] = useState(false);
-  const [status, setStatus] = useState(props.status);
+  const [newStatus, setNewStatus] = useState(status);
 
   useEffect(() => {
-    setStatus(props.status);
-  }, [props.status] )
+    setNewStatus(status);
+  }, [status] )
 
   const onStatusChange = (e) => {
-    setStatus(e.target.value);
+    setNewStatus(e.target.value);
   }
 
   const onStatusUpdate = () => {
-    props.updateProfileStatus(status);
+    updateProfileStatus(newStatus);
     setEditMode(false);
   }
 
   return (
     <div>
       <p className={s.status}>
-        <span className={s.statusTitle}>Status: </span>
+        {/* <span className={s.statusTitle}>Status: </span> */}
         {!editMode &&
           <span onClick={() => { setEditMode(true) }}
-            className={s.statusText}>{props.status || "N/A"}</span>
+            className={s.statusText}>{status || "N/A"}</span>
         }
         {editMode &&
-          <input className={s.statusInputField} type="text" value={status}
+          <input className={s.statusInputField} type="text" value={newStatus}
             autoFocus={true} onBlur={onStatusUpdate}
             onChange={onStatusChange} />
         }
