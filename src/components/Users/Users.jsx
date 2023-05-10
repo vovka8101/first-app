@@ -11,6 +11,7 @@ const Users = (props) => {
       {props.users.map(el => <User key={el.id} user={el} isFollowingProcess={props.isFollowingProcess}
         follow={props.follow} unfollow={props.unfollow} />)
       }
+      <Pagination {...props} />
     </div>
   );
 }
