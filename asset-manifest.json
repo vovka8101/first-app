@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/vovka8101/first-app/static/css/main.fbad3a2e.css",
-    "main.js": "/vovka8101/first-app/static/js/main.440514fb.js",
+    "main.js": "/vovka8101/first-app/static/js/main.792a3f35.js",
     "static/css/360.2fc8c23b.chunk.css": "/vovka8101/first-app/static/css/360.2fc8c23b.chunk.css",
     "static/js/360.b4876abe.chunk.js": "/vovka8101/first-app/static/js/360.b4876abe.chunk.js",
     "static/css/482.23f3cc91.chunk.css": "/vovka8101/first-app/static/css/482.23f3cc91.chunk.css",
@@ -11,7 +11,7 @@
     "static/media/preloader.svg": "/vovka8101/first-app/static/media/preloader.07aa168c436d0a15662ce06b47704138.svg",
     "index.html": "/vovka8101/first-app/index.html",
     "main.fbad3a2e.css.map": "/vovka8101/first-app/static/css/main.fbad3a2e.css.map",
-    "main.440514fb.js.map": "/vovka8101/first-app/static/js/main.440514fb.js.map",
+    "main.792a3f35.js.map": "/vovka8101/first-app/static/js/main.792a3f35.js.map",
     "360.2fc8c23b.chunk.css.map": "/vovka8101/first-app/static/css/360.2fc8c23b.chunk.css.map",
     "360.b4876abe.chunk.js.map": "/vovka8101/first-app/static/js/360.b4876abe.chunk.js.map",
     "482.23f3cc91.chunk.css.map": "/vovka8101/first-app/static/css/482.23f3cc91.chunk.css.map",
@@ -20,6 +20,6 @@
   },
   "entrypoints": [
     "static/css/main.fbad3a2e.css",
-    "static/js/main.440514fb.js"
+    "static/js/main.792a3f35.js"
   ]
 }
