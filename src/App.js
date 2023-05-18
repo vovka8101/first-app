@@ -8,7 +8,7 @@ import { Component, Suspense, lazy } from 'react';
 import { connect } from 'react-redux';
 import { initializeApp } from './redux/appReducer';
 import Preloader from './assets/common/Preloader';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import store from './redux/reduxStore';
 import { Provider } from 'react-redux';
 
@@ -54,11 +54,11 @@ const mapStateToProps = (state) => ({
 const AppContainer = connect(mapStateToProps, { initializeApp })(App);
 
 const MainApp = (props) => {
-  return <BrowserRouter>
+  return <HashRouter>
     <Provider store={store}>
       <AppContainer />
     </Provider>
-  </BrowserRouter>
+  </HashRouter>
 }
 
 export default MainApp;
