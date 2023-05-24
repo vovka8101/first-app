@@ -4,6 +4,7 @@ const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_PROFILE_STATUS = 'SET_PROFILE_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const SET_PROFILE_PHOTO = 'SET_PROFILE_PHOTO';
 
 const generateId = (arr) => {
   return arr[arr.length - 1].id + 1;
@@ -26,7 +27,6 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST: {
       const newId = generateId(state.posts);
       const newPost = { id: newId, message: action.postMessage, likesCount: 0, imgSrc: 'https://picsum.photos/id/299/200/200' };
-      debugger;
       return {
         ...state,
         posts: [newPost, ...state.posts]
@@ -44,6 +44,9 @@ const profileReducer = (state = initialState, action) => {
     case SET_PROFILE_STATUS: {
       return { ...state, status: action.status }
     }
+    case SET_PROFILE_PHOTO: {
+      return { ...state, profile: { ...state.profile, photos: action.photos } }
+    }
     default: return state;
   }
 };
@@ -59,6 +62,10 @@ export const setUserProfile = (profile) => {
 
 export const setProfileStatus = (status) => {
   return { type: SET_PROFILE_STATUS, status };
+};
+
+export const setProfilePhoto = (photos) => {
+  return { type: SET_PROFILE_PHOTO, photos };
 };
 
 // ----------------------- Redux-Thunk -----------------------
@@ -83,6 +90,17 @@ export const updateProfileStatus = (status) => {
       dispatch(setProfileStatus(status));
     } else {
       console.log('Error to update profile status');
+    }
+  }
+};
+
+export const savePhoto = (photo) => {
+  return async (dispatch) => {
+    const response = await profileAPI.updateProfilePhoto(photo);
+    if (response.data.resultCode === 0) {
+      dispatch(setProfilePhoto(response.data.data.photos));
+    } else {
+      console.log('Error to update profile photo');
     }
   }
 };

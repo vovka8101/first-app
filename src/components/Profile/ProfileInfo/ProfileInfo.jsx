@@ -1,14 +1,23 @@
 import s from './ProfileInfo.module.css';
-// import StatusInfo from './StatusInfo/StatusInfo';
 import StatusInfoHooks from './StatusInfo/StatusInfoHooks';
+import noAvatar from '../../../assets/images/noAvatar.jpg';
 
 const ProfileInfo = (props) => {
+
+  const handleSavePhoto = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0]);
+    }
+  }
+
   return (
     <div className={s.wrapper}>
       <div>
-          <img className={s.ava} 
-            src={!props.photos.large ? "https://picsum.photos/id/2/200/200" : props.photos.large} 
-            alt="Ava" />
+        <img className={s.ava}
+          src={props.photos.large || noAvatar}
+          alt="Ava"
+        />
+        { props.isOwner && <input type='file' onChange={handleSavePhoto} /> }
       </div>
       <div className={s.description}>
         <h2>{props.fullName}</h2>

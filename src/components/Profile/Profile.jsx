@@ -1,6 +1,5 @@
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import PostsContainer from './Posts/PostsContainer';
-import s from './Profile.module.css';
 import Preloader from '../../assets/common/Preloader';
 
 const Profile = (props) => {
@@ -9,10 +8,12 @@ const Profile = (props) => {
   }
   return (
     <div>
-      <div className={s.natureImg}>
-        <img className={s.nature} src="https://picsum.photos/id/110/1200/600" alt="picsum img" />
-      </div>
-      <ProfileInfo {...props.profile} status={props.status} updateProfileStatus={props.updateProfileStatus} />
+      <ProfileInfo {...props.profile}
+        status={props.status}
+        updateProfileStatus={props.updateProfileStatus}
+        isOwner={props.isOwner}
+        savePhoto={props.savePhoto}
+      />
       <PostsContainer />
     </div>
   );
