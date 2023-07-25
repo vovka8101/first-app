@@ -29,7 +29,6 @@ class StatusInfo extends React.Component {
     return (
       <div>
         <p className={s.status}>
-          {/* <span className={s.statusTitle}>Status: </span> */}
           {!this.state.editMode &&
             <span onClick={() => { this.setState({ editMode: true }) }}
               className={s.statusText}>{this.props.status || "N/A"}</span>

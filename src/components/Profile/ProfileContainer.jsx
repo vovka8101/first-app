@@ -4,7 +4,7 @@ import Profile from './Profile';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
-import { getProfile, getProfileStatus, updateProfileStatus, savePhoto } from '../../redux/profileReducer';
+import { getProfile, getProfileStatus, updateProfileStatus, savePhoto, updateProfileInfo } from '../../redux/profileReducer';
 
 // wrapper to use react router's v6 hooks in class component(to use HOC pattern, like in router v5)
 function withRouter(Component) {
@@ -49,6 +49,7 @@ class ProfileContainer extends React.Component {
       updateProfileStatus={this.props.updateProfileStatus}
       isOwner={!this.props.router.params.profileId}
       savePhoto={this.props.savePhoto}
+      updateProfileInfo={this.props.updateProfileInfo}
     />;
   }
 }
@@ -62,7 +63,7 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-  connect(mapStateToProps, { getProfile, getProfileStatus, updateProfileStatus, savePhoto }),
+  connect(mapStateToProps, { getProfile, getProfileStatus, updateProfileStatus, savePhoto, updateProfileInfo }),
   withRouter,
   withAuthRedirect
 )(ProfileContainer);

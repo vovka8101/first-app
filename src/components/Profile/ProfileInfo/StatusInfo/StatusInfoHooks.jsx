@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import s from '../ProfileInfo.module.css';
 
-const StatusInfoHooks = ({ status, updateProfileStatus }) => {
+const StatusInfoHooks = ({ status, updateProfileStatus, isOwner }) => {
 
   const [editMode, setEditMode] = useState(false);
   const [newStatus, setNewStatus] = useState(status);
@@ -22,10 +22,9 @@ const StatusInfoHooks = ({ status, updateProfileStatus }) => {
   return (
     <div>
       <p className={s.status}>
-        {/* <span className={s.statusTitle}>Status: </span> */}
         {!editMode &&
-          <span onClick={() => { setEditMode(true) }}
-            className={s.statusText}>{status || "N/A"}</span>
+          <span onClick={() => { isOwner && setEditMode(true) }}
+            className={isOwner ? s.statusText : ""}>{status || "N/A"}</span>
         }
         {editMode &&
           <input className={s.statusInputField} type="text" value={newStatus}

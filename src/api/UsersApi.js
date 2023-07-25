@@ -43,6 +43,9 @@ export const profileAPI = {
         'Content-Type': 'multipart/form-data'
       }
     });
+  },
+  updateProfileInfo(userInfo) {
+    return instance.put(`profile`, userInfo)
   }
 };
 

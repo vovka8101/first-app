@@ -1,10 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
-import ErrorMsg from "./ErrorMsg";
-import './Login.css';
+import ErrorMsg from "../../assets/common/ErrorMsg";
+import '../../assets/common/Forms.css';
 import { connect } from 'react-redux';
 import { Navigate } from "react-router-dom";
 import { login } from "../../redux/authReducer";
+
 
 const validationLoginForm = (values) => {
   const errors = {};

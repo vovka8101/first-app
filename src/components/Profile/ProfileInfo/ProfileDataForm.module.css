@@ -1,0 +1,101 @@
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  background-color:rgba(0,0,0,.75)
+}
+
+.formContainer {
+  max-height: 600px;
+  position: fixed;
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 420px;
+  background-color: #d0e4ff;
+  border-radius: 10px;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+}
+
+.iconClose {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+}
+
+.profileDataFormControl input[type="text"] {
+  width: 80%;
+}
+
+.profileDataFormControl input[type="url"] {
+  max-width: 90%;
+  height: 15px;
+}
+
+.isLookingLabel, .isLookingField {
+  display: inline-block;
+}
+
+.isLookingField {
+  margin-left: 10px;
+  width: 18px;
+  height: 18px;
+}
+
+.contactsTitle {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.contactsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-between;
+}
+
+.contactItem {
+  margin-top: 12px;
+  max-width: 40%;
+  min-width: 150px;
+}
+
+.submit {
+  width: fit-content;
+  margin: 22px auto 0;
+}
+
+.submit__btn {
+  padding: 6px 30px;
+  border: none;
+  background-color: lightseagreen;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit__btn:disabled {
+  background-color: #c3c3c3;
+  cursor: default;
+}
+
+.submit__btn:hover:enabled {
+  background-color: #2e6966;
+}
+
+@media (max-height: 600px) {
+  .formContainer {
+    top: 0;
+    bottom: 0;
+    overflow-y: scroll;
+    transform: translate(-50%, 0);
+  }
+}

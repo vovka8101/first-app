@@ -68,6 +68,7 @@ export const setProfilePhoto = (photos) => {
   return { type: SET_PROFILE_PHOTO, photos };
 };
 
+
 // ----------------------- Redux-Thunk -----------------------
 export const getProfile = (profileId) => {
   return async (dispatch) => {
@@ -104,5 +105,18 @@ export const savePhoto = (photo) => {
     }
   }
 };
+
+export const updateProfileInfo = (userInfo, setStatus) => {
+  return async (dispatch, getState) => {
+    const {id} = getState().auth;
+    const response = await profileAPI.updateProfileInfo(userInfo);
+    if (response.data.resultCode === 0) {
+      dispatch(getProfile(id));
+    } else {
+      setStatus(response.data.messages);
+      return Promise.reject(response.data.messages);
+    }
+  }
+}
 
 export default profileReducer;
