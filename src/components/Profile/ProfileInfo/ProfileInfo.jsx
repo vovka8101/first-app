@@ -17,8 +17,8 @@ const ProfileInfo = (props) => {
   }
 
   const profileContacts = props.contacts;
-
   return (
+    <>
     <div className={s.wrapper}>
       <div className={s.profileImgContainer}>
         <img className={s.ava}
@@ -41,6 +41,7 @@ const ProfileInfo = (props) => {
           setEditMode={setEditMode} />
       </div>
     </div>
+    </>
   );
 }
 

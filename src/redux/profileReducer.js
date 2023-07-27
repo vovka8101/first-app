@@ -111,6 +111,7 @@ export const updateProfileInfo = (userInfo, setStatus) => {
     const {id} = getState().auth;
     const response = await profileAPI.updateProfileInfo(userInfo);
     if (response.data.resultCode === 0) {
+      dispatch(setUserProfile(null));
       dispatch(getProfile(id));
     } else {
       setStatus(response.data.messages);
