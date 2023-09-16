@@ -1,22 +1,28 @@
 import { useEffect, useState } from 'react';
 import s from '../ProfileInfo.module.css';
+import ErrorMsg from '../../../../assets/common/ErrorMsg';
 
 const StatusInfoHooks = ({ status, updateProfileStatus, isOwner }) => {
 
   const [editMode, setEditMode] = useState(false);
   const [newStatus, setNewStatus] = useState(status);
+  const [errorStatus, setErrorStatus] = useState('');
 
   useEffect(() => {
     setNewStatus(status);
-  }, [status] )
+  }, [status])
 
   const onStatusChange = (e) => {
     setNewStatus(e.target.value);
   }
 
   const onStatusUpdate = () => {
-    updateProfileStatus(newStatus);
-    setEditMode(false);
+    updateProfileStatus(newStatus)
+      .then(() => {
+        setEditMode(false);
+        setErrorStatus(''); 
+      })
+      .catch(err => { setErrorStatus(err) })
   }
 
   return (
@@ -31,6 +37,7 @@ const StatusInfoHooks = ({ status, updateProfileStatus, isOwner }) => {
             autoFocus={true} onBlur={onStatusUpdate}
             onChange={onStatusChange} />
         }
+        {editMode && errorStatus && <ErrorMsg>{errorStatus}</ErrorMsg>}
       </p>
     </div>
   )

@@ -86,11 +86,15 @@ export const getProfileStatus = (profileId) => {
 
 export const updateProfileStatus = (status) => {
   return async (dispatch) => {
-    const response = await profileAPI.updateProfileStatus(status);
-    if (response.data.resultCode === 0) {
-      dispatch(setProfileStatus(status));
-    } else {
-      console.log('Error to update profile status');
+    try {
+      const response = await profileAPI.updateProfileStatus(status);
+      if (response.data.resultCode === 0) {
+        dispatch(setProfileStatus(status));
+      } else {
+        throw response.data.messages;
+      }
+    } catch (error) {
+      return Promise.reject(error[0]);
     }
   }
 };
@@ -109,13 +113,17 @@ export const savePhoto = (photo) => {
 export const updateProfileInfo = (userInfo, setStatus) => {
   return async (dispatch, getState) => {
     const {id} = getState().auth;
-    const response = await profileAPI.updateProfileInfo(userInfo);
-    if (response.data.resultCode === 0) {
-      dispatch(setUserProfile(null));
-      dispatch(getProfile(id));
-    } else {
-      setStatus(response.data.messages);
-      return Promise.reject(response.data.messages);
+    try {
+      const response = await profileAPI.updateProfileInfo(userInfo);
+      if (response.data.resultCode === 0) {
+        dispatch(setUserProfile(null));
+        dispatch(getProfile(id));
+      } else {
+        throw response.data.messages;
+      }
+    } catch (error) {
+      setStatus(error[0]);
+      return Promise.reject(error[0]);
     }
   }
 }
